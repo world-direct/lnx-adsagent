@@ -16,8 +16,8 @@ jobs:
     - name: Set Envrionment
       run: echo "IMAGE_TAG=${GITHUB_REF:10}" >> $GITHUB_ENV
     - name: docker build
-      run: docker build -t world-direct/lnx-adsagent:$IMAGE_TAG .
-    - name: docker login docker.io
-      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login docker.io -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      run: docker build -t worlddirect/lnx-adsagent:$IMAGE_TAG .
+    - name: docker login
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: docker push
-      run: docker push world-direct/lnx-adsagent:$IMAGE_TAG
+      run: docker push worlddirect/lnx-adsagent:$IMAGE_TAG
