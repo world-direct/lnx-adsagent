@@ -13,13 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: test
-      run: export
     - name: Set Envrionment
       run: echo "IMAGE_TAG=${GITHUB_REF:10}" >> $GITHUB_ENV
     - name: docker build
       run: docker build -t world-direct/lnx-adsagent:$IMAGE_TAG .
-    - name: docker login
+    - name: docker login docker.io
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: docker push
       run: docker push world-direct/lnx-adsagent:$IMAGE_TAG
