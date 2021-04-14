@@ -14,5 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Set Envrionment
+      run: echo ::set-env name=IMAGE_TAG::$(echo ${GITHUB_REF:10})    
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag world-direct\lnx-adsagent:$(GITHUB_REF)
+      run: docker build . --file Dockerfile --tag world-direct\lnx-adsagent:$IMAGE_TAG
