@@ -1,3 +1,4 @@
 #!/bin/sh
 set -eux
-docker build --no-cache .
+docker image rm healthcheck || true
+docker build --no-cache -t healthcheck .
