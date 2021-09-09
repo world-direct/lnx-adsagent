@@ -7,9 +7,10 @@ on:
 
 jobs:
 
-  build:
+  push:
 
     runs-on: ubuntu-latest
+    if: github.event.base_ref == 'refs/heads/deploy/dockerhub'
 
     steps:
     - uses: actions/checkout@v2
