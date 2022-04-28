@@ -1,4 +1,0 @@
-#!/bin/sh
-set -eux
-docker image rm healthcheck || true
-docker build --no-cache -t healthcheck .

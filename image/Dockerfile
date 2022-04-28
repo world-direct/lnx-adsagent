@@ -50,7 +50,4 @@ WORKDIR /azp
 COPY ./start.sh .
 RUN chmod +x start.sh
 
-# add healthcheck files
-COPY ./healthcheck /healthcheck
-
 CMD ["./start.sh"]
