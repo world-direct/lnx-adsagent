@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: dind20-test
+spec:
+  volumes:
+  - name: var2
+    emptyDir: {}
+
+  containers:
+    - name: cmd
+      image: docker:20.10
+      command: 
+      - sh 
+      - "-c"
+      - "docker context create dind --docker=unix:///var2/run/docker.sock && docker context use dind && sleep 1h"
+      volumeMounts:
+      - mountPath: /var2
+        name: var2
+
+    - name: dind
+      image: docker:20.10-dind
+      command: ["dockerd", "--host", "unix:///var/run/docker.sock"]
+      volumeMounts:
+      - mountPath: /var2
+        name: var2
+      securityContext:
+        privileged: true

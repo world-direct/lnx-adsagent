@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: dind20-test
+spec:
+  containers:
+    - name: cmd
+      image: docker:20.10
+      command: 
+      - sh 
+      - "-c"
+      - "ls && docker context create dind --docker=host=tcp://localhost:2375 && docker context use dind && sleep 1h"
+    - name: dind
+      image: docker:20.10-dind
+      command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
+      securityContext:
+        privileged: true
