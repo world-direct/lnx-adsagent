@@ -24,9 +24,6 @@ spec:
             - secretRef:
                 name: lnx-adsagent-config
           env:
-            - name: DOCKER_HOST 
-              value: tcp://127.0.0.1:2375
-
               # the agent name is the name of the pod
             - name: AZP_AGENT_NAME
               valueFrom:
@@ -35,6 +32,7 @@ spec:
 
         - name: dind-daemon 
           image: docker:20.10.14-dind 
+          command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
           securityContext: 
               privileged: true 
           volumeMounts: 

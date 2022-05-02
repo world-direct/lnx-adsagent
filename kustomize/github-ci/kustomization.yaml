@@ -7,11 +7,11 @@ bases:
 secretGenerator:
 - name: lnx-adsagent-config
   envs:
-    - .secrets.env
+    - secrets.substr.env
 
 images:
 - name: AGENT_IMAGE
   newName: lnx-adsagent
-  newTag: dev
+  newTag: ci
 
-  
+nameSuffix: -ci

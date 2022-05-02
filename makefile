@@ -1,15 +1,18 @@
-.ONESHELL: # make cd work
-
 image=lnx-adsagent
 tag=dev
 
-dev-build-image:
-	cd image
+build-image:
+	cd image && \
 	docker build -t $(image):$(tag) .
 
-dev-install-kind: dev-build-image
+kind-install: build-image
 	kind load docker-image $(image):$(tag)
 	kustomize build ./kustomize/dev | kubectl apply -f -
+	kubectl describe pod 
 
-dev-uninstall-kind: 
+kind-uninstall: 
 	kustomize build ./kustomize/dev | kubectl delete -f -
+
+kind-logs:
+	kubectl logs lnx-adsagent-dev-0 -c ads-agent
+
