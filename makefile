@@ -16,3 +16,6 @@ kind-uninstall:
 kind-logs:
 	kubectl logs lnx-adsagent-dev-0 -c ads-agent
 
+kind-exec-it:
+	kubectl exec lnx-adsagent-dev-0 -c ads-agent -it -- bash
+
