@@ -23,17 +23,6 @@ spec:
           envFrom:
             - secretRef:
                 name: lnx-adsagent-config
-          # livenessProbe:
-          #   exec:
-          #     command:
-          #     - bash
-          #     - -c
-          #     - cd /healthcheck && ./runcheck
-          #   failureThreshold: 2
-          #   initialDelaySeconds: 120
-          #   periodSeconds: 60
-          #   successThreshold: 1
-          #   timeoutSeconds: 10
           env:
             - name: DOCKER_HOST 
               value: tcp://127.0.0.1:2375
@@ -45,7 +34,7 @@ spec:
                       fieldPath: metadata.name
 
         - name: dind-daemon 
-          image: docker:18-dind 
+          image: docker:20.10.14-dind 
           securityContext: 
               privileged: true 
           volumeMounts: 
