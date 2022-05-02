@@ -47,7 +47,7 @@ RUN docker --version && docker-compose --version
 
 # add version to env to show in "Capabilies"
 ENV DOCKER_VERSION=$DOCKER_VERSION
-ENV DOCKER_COMPOSE_VERSION=$DOCKER_VERSION
+ENV DOCKER_COMPOSE_VERSION=$DOCKER_COMPOSE_VERSION
 
 WORKDIR /azp
 
