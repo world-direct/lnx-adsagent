@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: 
+    name: lnx-adsagent
+spec:
+  serviceName: lnx-adsagent
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: lnx-adsagent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: lnx-adsagent
+    spec: 
+      volumes: 
+        - name: docker-graph-storage 
+          emptyDir: {}    
+
+      containers: 
+        - name: ads-agent 
+          image: AGENT_IMAGE
+          envFrom:
+            - secretRef:
+                name: lnx-adsagent-config
+          env:
+              # the agent name is the name of the pod
+            - name: AZP_AGENT_NAME
+              valueFrom:
+                  fieldRef:
+                      fieldPath: metadata.name
+
+        - name: dind-daemon 
+          image: docker:20.10.14-dind 
+          command: ["dockerd", "--host", "tcp://127.0.0.1:2375"]
+          securityContext: 
+              privileged: true 
+          volumeMounts: 
+            - name: docker-graph-storage 
+              mountPath: /var/lib/docker

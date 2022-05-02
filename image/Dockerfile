@@ -1,7 +1,7 @@
 ARG UBUNTU_VERSION=16.04
 FROM ubuntu:$UBUNTU_VERSION
 
-ARG DOCKER_VERSION=18.09.9
+ARG DOCKER_VERSION=20.10.14
 ARG DOCKER_COMPOSE_VERSION=1.26.2
 
 
@@ -45,12 +45,15 @@ RUN curl -fsSL "https://github.com/docker/compose/releases/download/$DOCKER_COMP
 # Print info
 RUN docker --version && docker-compose --version
 
+# add version to env to show in "Capabilies"
+ENV DOCKER_VERSION=$DOCKER_VERSION
+ENV DOCKER_COMPOSE_VERSION=$DOCKER_COMPOSE_VERSION
+
 WORKDIR /azp
+
+COPY ./config.sh .
+RUN ./config.sh
 
 COPY ./start.sh .
 RUN chmod +x start.sh
-
-# add healthcheck files
-COPY ./healthcheck /healthcheck
-
 CMD ["./start.sh"]
