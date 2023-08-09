@@ -1,5 +1,7 @@
 # Linux Ads Agent
 
+> This repo is now archived and no longer maintained on Github; find the most up-to-date version on [ADS](https://ads.world-direct.at/Company/Technology/_git/lnx-adsagent) instead.
+
 Minimal Build agent Azure Devops Server.
 This was created from [Running a self hosted agent in Docker](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/docker?view=azure-devops)
 
